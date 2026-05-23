@@ -1,4 +1,3 @@
-import React from 'react';
 import { Autocomplete, TextField, CircularProgress } from '@mui/material';
 import { useCountries } from '../../hooks/useCountries';
 import type { Country } from '../../types/covid';

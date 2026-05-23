@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, CardContent, Typography, Skeleton, Alert, Button } from '@mui/material';
 import CountUp from 'react-countup';
 

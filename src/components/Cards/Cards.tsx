@@ -1,4 +1,3 @@
-import React from 'react';
 import Grid from '@mui/material/Grid2';
 import { StatCard } from './StatCard';
 import type { CovidSnapshot } from '../../types/covid';
