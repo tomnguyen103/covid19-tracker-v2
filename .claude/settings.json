@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "powershell",
+            "command": "$raw = [Console]::In.ReadToEnd(); $j = $raw | ConvertFrom-Json; $fp = $j.tool_input.file_path; if ($fp -like \"*CLAUDE.md\") { @{hookSpecificOutput=@{hookEventName=\"PreToolUse\";permissionDecision=\"ask\";permissionDecisionReason=\"About to update CLAUDE.md - please confirm this change reflects completed work.\"}} | ConvertTo-Json -Compress }",
+            "statusMessage": "Checking CLAUDE.md update..."
+          }
+        ]
+      }
+    ]
+  }
+}
