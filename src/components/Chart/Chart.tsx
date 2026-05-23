@@ -31,6 +31,13 @@ function fmt(v: number | string) {
   return typeof v === 'number' ? v.toLocaleString() : v;
 }
 
+function compact(v: number | string) {
+  if (typeof v !== 'number') return v;
+  if (v >= 1_000_000) return `${(v / 1_000_000).toFixed(1)}M`;
+  if (v >= 1_000) return `${(v / 1_000).toFixed(0)}K`;
+  return v.toLocaleString();
+}
+
 export function Chart({
   countryA,
   countryB,
@@ -73,14 +80,14 @@ export function Chart({
           Global Daily History
         </Typography>
         <ResponsiveContainer width="100%" height={400}>
-          <LineChart data={dailyData}>
+          <LineChart data={dailyData} margin={{ left: 10 }}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis
               dataKey="date"
               tick={{ fontSize: 10 }}
               interval={Math.floor(dailyData.length / 10)}
             />
-            <YAxis tickFormatter={(v: number) => `${(v / 1_000_000).toFixed(1)}M`} />
+            <YAxis tickFormatter={compact} />
             <Tooltip formatter={fmt} />
             <Legend />
             <Line
@@ -148,10 +155,10 @@ export function Chart({
           {countryA} vs {countryB}
         </Typography>
         <ResponsiveContainer width="100%" height={400}>
-          <BarChart data={comparisonData}>
+          <BarChart data={comparisonData} margin={{ left: 10 }}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" />
-            <YAxis tickFormatter={fmt} />
+            <YAxis tickFormatter={compact} />
             <Tooltip formatter={fmt} />
             <Legend />
             <Bar dataKey={countryA} fill="#1976d2" />
@@ -173,10 +180,10 @@ export function Chart({
         Current data in {countryA}
       </Typography>
       <ResponsiveContainer width="100%" height={400}>
-        <BarChart data={barData}>
+        <BarChart data={barData} margin={{ left: 10 }}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
-          <YAxis tickFormatter={fmt} />
+          <YAxis tickFormatter={compact} />
           <Tooltip formatter={fmt} />
           <Bar dataKey="value" fill="#1976d2" />
         </BarChart>

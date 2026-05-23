@@ -23,7 +23,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Box component="main" className="max-w-5xl mx-auto px-4 py-8">
+      <Box component="main" className="max-w-5xl mx-auto px-4 pt-4 pb-8">
         {children}
       </Box>
     </Box>

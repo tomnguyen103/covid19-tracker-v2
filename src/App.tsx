@@ -22,12 +22,26 @@ function TrackerContent() {
 
   return (
     <>
-      <Cards
-        snapshot={snapshotAQuery.data}
-        isLoading={snapshotAQuery.isLoading}
-        isError={snapshotAQuery.isError}
-        onRetry={() => { void snapshotAQuery.refetch(); }}
-      />
+      <div className={countryB ? 'flex gap-4 mb-8' : ''}>
+        <Cards
+          snapshot={snapshotAQuery.data}
+          isLoading={snapshotAQuery.isLoading}
+          isError={snapshotAQuery.isError}
+          onRetry={() => { void snapshotAQuery.refetch(); }}
+          label={countryB ? (countryA ?? 'Global') : undefined}
+          className={countryB ? 'flex-1 min-w-0' : 'mb-8'}
+        />
+        {countryB && (
+          <Cards
+            snapshot={snapshotBQuery.data}
+            isLoading={snapshotBQuery.isLoading}
+            isError={snapshotBQuery.isError}
+            onRetry={() => { void snapshotBQuery.refetch(); }}
+            label={countryB}
+            className="flex-1 min-w-0"
+          />
+        )}
+      </div>
       <div className="flex gap-4 mb-8 flex-wrap">
         <CountryPicker label="Country" value={countryA} onChange={setCountryA} />
         <CountryPicker label="Compare with…" value={countryB} onChange={setCountryB} />

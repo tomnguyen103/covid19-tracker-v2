@@ -7,6 +7,8 @@ interface CardsProps {
   isLoading: boolean;
   isError: boolean;
   onRetry: () => void;
+  label?: string;
+  className?: string;
 }
 
 const CARD_CONFIG = [
@@ -30,23 +32,26 @@ const CARD_CONFIG = [
   },
 ];
 
-export function Cards({ snapshot, isLoading, isError, onRetry }: CardsProps) {
+export function Cards({ snapshot, isLoading, isError, onRetry, label, className = 'mb-8' }: CardsProps) {
   return (
-    <Grid container spacing={3} className="mb-8">
-      {CARD_CONFIG.map(({ key, title, description, color }) => (
-        <Grid size={{ xs: 12, md: 4 }} key={key}>
-          <StatCard
-            title={title}
-            value={snapshot?.[key]}
-            description={description}
-            lastUpdate={snapshot?.lastUpdate}
-            color={color}
-            isLoading={isLoading}
-            isError={isError}
-            onRetry={onRetry}
-          />
-        </Grid>
-      ))}
-    </Grid>
+    <div className={className}>
+      {label && <h2 className="text-lg font-semibold mb-3 opacity-80">{label}</h2>}
+      <Grid container spacing={3}>
+        {CARD_CONFIG.map(({ key, title, description, color }) => (
+          <Grid size={{ xs: 12, md: 4 }} key={key}>
+            <StatCard
+              title={title}
+              value={snapshot?.[key]}
+              description={description}
+              lastUpdate={snapshot?.lastUpdate}
+              color={color}
+              isLoading={isLoading}
+              isError={isError}
+              onRetry={onRetry}
+            />
+          </Grid>
+        ))}
+      </Grid>
+    </div>
   );
 }
